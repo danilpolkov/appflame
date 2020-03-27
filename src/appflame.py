@@ -16,6 +16,19 @@ def score_models(models,
                  time_to_fit,
                  names,
                  name_suffix=''):
+    
+    '''
+    score list of models with cross validation
+    
+    return:
+    ---------
+    list with values
+        score values for every fold
+        time that takes to evaluate every fold
+        name of the model
+    
+    '''
+    
     for name, model in models:
         kfold = KFold(n_splits=CV_FOLDS)
         cv_results = cross_validate(model,
@@ -34,6 +47,11 @@ def score_models(models,
 
 
 class Neural_Network:
+    
+    '''
+    build neural netwotk 
+    
+    '''
 
     def __init__(self):
         self.epoch = 1
@@ -53,11 +71,6 @@ class Neural_Network:
         self.epoch = n
         return self.epoch
     
-    @classmethod
-    def metric(self, m):
-        self.metric = m
-        return self.metric
-    
     def fit(self, X, y):
         self.model.fit(X, y, batch_size = 32, epochs=self.epoch)
         return self.model
@@ -72,6 +85,17 @@ class Neural_Network:
     
     
 def train_nn_on_fold(model, x_train_nn, y_train, i, rows_per_fold):
+    
+    '''
+    train neural network on several folds
+    
+    return:
+    --------
+    list with values
+        list of scores for every fold
+        list of time that takes to evaluate every fold
+        
+    '''
 
     start = datetime.datetime.now()
     train = x_train_nn.drop(range(rows_per_fold * i, rows_per_fold * (i + 1)))
@@ -87,6 +111,13 @@ def train_nn_on_fold(model, x_train_nn, y_train, i, rows_per_fold):
    
 
 def check_confusion_matrix(model, X_train, X_test, y_train, y_test, name):
+    
+    '''
+    train model on full test dataset and make prediction for test
+    show classification report and plot confusion matrix
+    
+    '''
+    
     model.fit(X_train, y_train.values.ravel())
     pred = model.predict(X_test)
 
@@ -111,7 +142,12 @@ def check_confusion_matrix(model, X_train, X_test, y_train, y_test, name):
     
 
 def show_comparing_table(names, accuracy_results, time_to_fit):
-
+    
+    '''
+    print comparing table with model name, avg score and time to fit
+    
+    '''
+    
     comparing_df = pd.DataFrame(np.array([names, accuracy_results, time_to_fit]).T,
                                 columns=['name', 'roc-auc', 'time to learn'])
     
