@@ -5,7 +5,7 @@ this repository was created for test task
 structure:
 ```
 |
-|- data        -> folder with external  adn processed data
+|- data        -> folder with external and processed data
 |
 |- notebooks   -> folder with notebooks
 |
@@ -22,3 +22,4 @@ poetry run jupyter notebook
 
 Задача:
 1. построить модель для выявления фродовых транзакций
+2. проанализировать результаты A/B теста
