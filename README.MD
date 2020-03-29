@@ -22,4 +22,8 @@ poetry run jupyter notebook
 
 Задача:
 1. построить модель для выявления фродовых транзакций
+notebooks/fraud_detection.ipynb
 2. проанализировать результаты A/B теста
+notebooks/AB_test.ipynb
+3. SQL запросы
+other/SQL_TEST.pdf
